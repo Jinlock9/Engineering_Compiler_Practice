@@ -2,7 +2,6 @@
 #define __TOKEN_H__
 
 #include <string>
-#include <map>
 
 #include "Token.h"
 

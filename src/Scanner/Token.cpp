@@ -1,5 +1,7 @@
 #include "Token.h"
 
+#include <map>
+
 static std::map<std::string, Kind> stringToKind = {
     {"#unknown",    Kind::Unknown},
     {"#EndOfToken", Kind::EndOfToken},
