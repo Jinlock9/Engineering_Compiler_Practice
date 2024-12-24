@@ -1,5 +1,5 @@
 # Engineering Compiler Practice
-I practiced by referring to *Engineering a Compiler, 2nd Edition* by Keith D. Cooper and Linda Torczon.
+I practiced by referring to *Crafring a Compiler* by Yu Jongwon.
 
 ## Author
 #### Jinlock Choi
@@ -10,5 +10,3 @@ I practiced by referring to *Engineering a Compiler, 2nd Edition* by Keith D. Co
     - Shanghai, China
 
 ## Practices
-### Table-Driven Scanner
-1. A Table-Driven Scanner for Register Names (*ILOC Registern Names*)
