@@ -4,9 +4,12 @@
 #include <string>
 #include <vector>
 
-#include "Token.h"
+#include "../Scanner/Token.h"
+#include "../Scanner/Scanner.h"
+#include "../Parser/Node.h"
 
 auto scan(std::string)->std::vector<Token>;
+auto parse(std::vector<Token>)->Program *;
 auto printTokenList(std::vector<Token>)->void;
 
 #endif // __MAIN_H__

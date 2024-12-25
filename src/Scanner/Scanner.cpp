@@ -1,25 +1,4 @@
-#include <string>
-#include <vector>
-#include <iostream>
-
-#include "Token.h"
-
-static std::string::iterator current;
-
-enum class CharType {
-    Unknown,
-    WhiteSpace,
-    NumberLiteral,
-    StringLiteral,
-    IdentifierAndKeyword,
-    OperatorAndPunctuator,
-};
-
-auto getCharType(char c)->CharType;
-auto isCharType(char c, CharType type)->bool;
-auto scanNumberLiteral()->Token;
-auto scanStringLiteral()->Token;
-auto scanIdentifierAndKeyword()->Token;
+#include "Scanner.h"
 
 auto scan(std::string sourceCode)->std::vector<Token> {
     std::vector<Token> result;
@@ -47,7 +26,7 @@ auto scan(std::string sourceCode)->std::vector<Token> {
                 exit(1);
         }
     }
-    result.push_back({Kind::EndOfToken});
+    result.push_back({Kind::EndOfToken, ""});
 
     return result;
 }   
@@ -55,10 +34,10 @@ auto scan(std::string sourceCode)->std::vector<Token> {
 auto getCharType(char c)->CharType {
     if (c == '\'') return CharType::StringLiteral;
     if ('0' <= c && c <= '9') return CharType::NumberLiteral;
-    if ('a' <= c && c <= 'z' || 'A' <= c && c <= 'Z' || c == '_') return CharType::IdentifierAndKeyword;
-    if (33 <= c && c <= 47 && c != '\'' ||
-        58 <= c && c <= 64 ||
-        91 <= c && c <= 126) return CharType::OperatorAndPunctuator;
+    if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || c == '_') return CharType::IdentifierAndKeyword;
+    if ((33 <= c && c <= 47 && c != '\'') ||
+        (58 <= c && c <= 64) ||
+        (91 <= c && c <= 126)) return CharType::OperatorAndPunctuator;
     if (' ' == c || '\t' == c || '\r' == c || '\n' == c) return CharType::WhiteSpace;
     return CharType::Unknown;
 }
@@ -70,13 +49,13 @@ auto isCharType(char c, CharType type)->bool {
         case CharType::StringLiteral:
             return 32 <= c && c <= 126 && c != '\'';
         case CharType::IdentifierAndKeyword:
-            return '0' <= c && c <= '9' ||
-                   'a' <= c && c <= 'z' ||
-                   'A' <= c && c <= 'Z';
+            return ('0' <= c && c <= '9') ||
+                   ('a' <= c && c <= 'z') ||
+                   ('A' <= c && c <= 'Z');
         case CharType::OperatorAndPunctuator:
-            return 33 <= c && c <= 47 ||
-                   58 <= c && c <= 64 ||
-                   91 <= c && c <= 126;
+            return (33 <= c && c <= 47) ||
+                   (58 <= c && c <= 64) ||
+                   (91 <= c && c <= 126);
         default:
             return false;
     }
@@ -103,7 +82,7 @@ auto scanStringLiteral()->Token {
         string += *current++;
     }
     if (*current != '\'') {
-        std::cout << "There is no terminating (')":
+        std::cout << "There is no terminating (')";
         exit(1);
     }
     current++; // skip '

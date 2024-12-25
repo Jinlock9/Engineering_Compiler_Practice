@@ -1,6 +1,7 @@
 #include "Token.h"
 
 #include <map>
+#include <iomanip>
 
 static std::map<std::string, Kind> stringToKind = {
     {"#unknown",    Kind::Unknown},
@@ -54,9 +55,25 @@ static std::map<std::string, Kind> stringToKind = {
     {"]",           Kind::RightBracket},
 };
 
+static auto kindToString = [] {
+  std::map<Kind, std::string> result;
+  for (auto& [key, value] : stringToKind)
+    result[value] = key;
+  return result;
+}();
+
 auto toKind(std::string string)->Kind {
-    if (stringToKind.count(string)) {
-        return stringToKind.at(string);
-    }
-    return Kind::Unknown;
+  if (stringToKind.count(string))
+    return stringToKind.at(string);
+  return Kind::Unknown;
+}
+
+auto toString(Kind type)->std::string {
+  if (kindToString.count(type))
+    return kindToString.at(type);
+  return "";
+}
+
+auto operator<<(std::ostream& stream, Token& token)->std::ostream& {
+  return stream << std::setw(12) << std::left << toString(token.kind) << token.string;
 }

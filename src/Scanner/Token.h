@@ -2,6 +2,7 @@
 #define __TOKEN_H__
 
 #include <string>
+#include <iostream>
 
 #include "Token.h"
 
@@ -34,12 +35,15 @@ enum class Kind {
     LeftBracket, RightBracket,
 };
 
+auto toKind(std::string)->Kind;
+auto toString(Kind)->std::string;
+
 struct Token {
     // Token Structure
     Kind kind = Kind::Unknown;
     std::string string;
 };
 
-auto toKind(std::string)->Kind;
+auto operator<<(std::ostream&, Token&)->std::ostream&;
 
 #endif // __TOKEN_H__
