@@ -10,6 +10,8 @@
 
 auto scan(std::string)->std::vector<Token>;
 auto parse(std::vector<Token>)->Program *;
+auto interpret(Program *)->void;
+
 auto printTokenList(std::vector<Token>)->void;
 auto printSyntaxTree(Program*)->void;
 
