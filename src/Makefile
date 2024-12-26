@@ -8,11 +8,14 @@ TARGET = main
 # Directories
 SRC_DIR = ../src
 SCANNER_DIR = $(SRC_DIR)/Scanner
+PARSER_DIR = $(SRC_DIR)/Parser
 
 # Source files
 SRCS = $(SRC_DIR)/Main.cpp \
        $(SCANNER_DIR)/Scanner.cpp \
-       $(SCANNER_DIR)/Token.cpp
+       $(SCANNER_DIR)/Token.cpp \
+       $(PARSER_DIR)/Parser.cpp \
+       $(PARSER_DIR)/Printer.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
@@ -35,5 +38,9 @@ $(TARGET): $(OBJS)
 clean:
 	rm -f $(OBJS) $(TARGET)
 
+# Debug using LLDB
+debug: $(TARGET)
+	lldb ./$(TARGET)
+
 # Phony targets
-.PHONY: all clean
+.PHONY: all clean debug
