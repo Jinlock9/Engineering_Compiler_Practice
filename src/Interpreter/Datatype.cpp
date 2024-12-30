@@ -73,7 +73,7 @@ auto isMap(std::any value)->bool {
     return value.type() == typeid(Map *);
 }
 
-auto toMap(std::any value)->Map* {
+auto toMap(std::any value)->Map * {
     return std::any_cast<Map *>(value);
 }
 

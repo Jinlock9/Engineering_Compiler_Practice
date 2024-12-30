@@ -15,6 +15,7 @@ struct ContinueException {};
 static std::map<std::string, std::any> global;
 static std::list<std::list<std::map<std::string, std::any>>> local;
 static std::map<std::string, Function *> functionTable;
+
 extern std::map<std::string, std::function<std::any(std::vector<std::any>)>> builtinFunctionTable;
 
 auto interpret(Program *program)->void {
@@ -54,14 +55,14 @@ auto For::interpret()->void {
     while (true) {
         auto result = condition->interpret();
         if (isTrue(result) == false)
-        break;
+            break;
         try {
-        for (auto &node: block)
-            node->interpret();
+            for (auto &node: block)
+                node->interpret();
         } catch (ContinueException) {
-        /* empty */
+            /* empty */
         } catch (BreakException) {
-        break;
+            break;
         }
         expression->interpret();
     }
@@ -80,10 +81,10 @@ auto If::interpret()->void {
     for (size_t i = 0; i < conditions.size(); i++) {
         auto result = conditions[i]->interpret();
         if (isTrue(result) == false)
-        continue;
+            continue;
         local.back().emplace_front();
         for (auto& node: blocks[i])
-        node->interpret();
+            node->interpret();
         local.back().pop_front();
         return;
     }
