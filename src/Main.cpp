@@ -27,6 +27,7 @@ auto main()->int {
 
     std::cout << "[4] Run Code Generator" << std::endl;
     auto objectCode = generate(syntaxTree);
+    printObjectCode(objectCode);
     std::cout << std::endl;
 
     return 0;
