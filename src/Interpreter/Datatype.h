@@ -40,17 +40,17 @@ auto isString(std::any value)->bool;
 auto toString(std::any value)->std::string;
 
 auto isArray(std::any value)->bool;
-auto toArray(std::any value)->Array *;
+auto toArray(std::any value)->Array*;
 auto getValueOfArray(std::any object, std::any index)->std::any;
 auto setValueOfArray(std::any object, std::any index, std::any value)->std::any;
 
 auto isMap(std::any value)->bool;
-auto toMap(std::any value)->Map *;
+auto toMap(std::any value)->Map*;
 auto getValueOfMap(std::any object, std::any key)->std::any;
 auto setValueOfMap(std::any object, std::any key, std::any value)->std::any;
 
 auto isFunction(std::any)->bool;
-auto toFunction(std::any)->Function *;
+auto toFunction(std::any)->Function*;
 
 auto isBuiltinFunction(std::any value)->bool;
 auto toBuiltinFunction(std::any value)->std::function<std::any(std::vector<std::any>)>;

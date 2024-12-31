@@ -6,7 +6,7 @@
 
 static std::vector<Token>::iterator current;
 
-auto parse(std::vector<Token> tokens)->Program * {
+auto parse(std::vector<Token> tokens)->Program* {
     auto result = new Program();
     current = tokens.begin();
     while (current->kind != Kind::EndOfToken) {
@@ -24,7 +24,7 @@ auto parse(std::vector<Token> tokens)->Program * {
     return result;
 }
 
-auto parseFunction()->Function * {
+auto parseFunction()->Function* {
     auto result = new Function();
     skipCurrent(Kind::Function);
     result->name = current->string;
@@ -43,8 +43,8 @@ auto parseFunction()->Function * {
     return result;
 }
 
-auto parseBlock()->std::vector<Statement *> {
-    std::vector<Statement *> result;
+auto parseBlock()->std::vector<Statement*> {
+    std::vector<Statement*> result;
     while (current->kind != Kind::RightBrace) {
         switch (current->kind) {
             case Kind::Variable:
@@ -80,7 +80,7 @@ auto parseBlock()->std::vector<Statement *> {
     return result;
 }
 
-auto parseVariable()->Variable * {
+auto parseVariable()->Variable* {
     auto result = new Variable();
     skipCurrent(Kind::Variable);
     result->name = current->string;
@@ -95,7 +95,7 @@ auto parseVariable()->Variable * {
     return result;
 }
 
-auto parseFor()->For * {
+auto parseFor()->For* {
     auto result = new For();
     skipCurrent(Kind::For);
     result->variable = new Variable();
@@ -125,7 +125,7 @@ auto parseFor()->For * {
     return result;
 }
 
-auto parseIf()->If * {
+auto parseIf()->If* {
     auto result = new If();
     skipCurrent(Kind::If);
     do {
@@ -147,7 +147,7 @@ auto parseIf()->If * {
     return result;
 }
 
-auto parsePrint()->Print * {
+auto parsePrint()->Print* {
     auto result = new Print();
     result->lineFeed = current->kind == Kind::PrintLine;
     skipCurrent();
@@ -159,7 +159,7 @@ auto parsePrint()->Print * {
     return result;
 }
 
-auto parseReturn()->Return * {
+auto parseReturn()->Return* {
     auto result = new Return();
     skipCurrent(Kind::Return);
     result->expression = parseExpression();
@@ -171,42 +171,42 @@ auto parseReturn()->Return * {
     return result;
 }
 
-auto parseBreak()->Break * {
+auto parseBreak()->Break* {
     auto result = new Break();
     skipCurrent(Kind::Break);
     skipCurrent(Kind::Semicolon);
     return result;
 }
 
-auto parseContinue()->Continue * {
+auto parseContinue()->Continue* {
     auto result = new Continue();
     skipCurrent(Kind::Continue);
     skipCurrent(Kind::Semicolon);
     return result;
 }
 
-auto parseExpressionStatement()->ExpressionStatement * {
+auto parseExpressionStatement()->ExpressionStatement* {
     auto result = new ExpressionStatement();
     result->expression = parseExpression();
     skipCurrent(Kind::Semicolon);
     return result;
 }
 
-auto parseExpression()->Expression * {
+auto parseExpression()->Expression* {
     return parseAssignment();
 }
 
-auto parseAssignment()->Expression * {
+auto parseAssignment()->Expression* {
     auto result = parseOr();
     if (current->kind != Kind::Assignment) return result;
     skipCurrent(Kind::Assignment);
-    if (auto getVariable = dynamic_cast<GetVariable *>(result)) {
+    if (auto getVariable = dynamic_cast<GetVariable*>(result)) {
         auto result = new SetVariable();
         result->name = getVariable->name;
         result->value = parseAssignment();
         return result;
     }
-    if (auto getElement = dynamic_cast<GetElement *>(result)) {
+    if (auto getElement = dynamic_cast<GetElement*>(result)) {
         auto result = new SetElement();
         result->sub = getElement->sub;
         result->index = getElement->index;
@@ -217,7 +217,7 @@ auto parseAssignment()->Expression * {
     exit(1);
 }
 
-auto parseOr()->Expression * {
+auto parseOr()->Expression* {
     auto result = parseAnd();
     while (skipCurrentIf(Kind::LogicalOr)) {
         auto temp = new Or();
@@ -228,7 +228,7 @@ auto parseOr()->Expression * {
     return result;
 }
 
-auto parseAnd()->Expression * {
+auto parseAnd()->Expression* {
     auto result = parseRelational();
     while (skipCurrentIf(Kind::LogicalAnd)) {
         auto temp = new And();
@@ -239,7 +239,7 @@ auto parseAnd()->Expression * {
     return result;
 }
 
-auto parseRelational()->Expression * {
+auto parseRelational()->Expression* {
     std::set<Kind> operators = {
         Kind::Equal,
         Kind::NotEqual,
@@ -388,11 +388,11 @@ auto parseMapLiteral()->Expression* {
     skipCurrent(Kind::LeftBrace);
     if (current->kind != Kind::RightBrace) {
         do {
-        auto name = current->string;
-        skipCurrent(Kind::StringLiteral);
-        skipCurrent(Kind::Colon);
-        auto value = parseExpression();
-        result->values[name] = value;
+            auto name = current->string;
+            skipCurrent(Kind::StringLiteral);
+            skipCurrent(Kind::Colon);
+            auto value = parseExpression();
+            result->values[name] = value;
         } while (skipCurrentIf(Kind::Comma));
     }
     skipCurrent(Kind::RightBrace);
@@ -416,9 +416,9 @@ auto parseInnerExpression()->Expression* {
 auto parsePostfix(Expression* sub)->Expression* {
     while (true) {
         switch (current->kind) {
-        case Kind::LeftParen:  sub = parseCall(sub);    break;
-        case Kind::LeftBracket: sub = parseElement(sub); break;
-        default: return sub;
+            case Kind::LeftParen:  sub = parseCall(sub);    break;
+            case Kind::LeftBracket: sub = parseElement(sub); break;
+            default: return sub;
         }
     }
 }

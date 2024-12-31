@@ -9,7 +9,7 @@
 #include "../Parser/Node.h"
 
 auto scan(std::string)->std::vector<Token>;
-auto parse(std::vector<Token>)->Program *;
+auto parse(std::vector<Token>)->Program*;
 auto interpret(Program *)->void;
 
 auto printTokenList(std::vector<Token>)->void;

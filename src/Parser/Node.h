@@ -9,7 +9,7 @@
 #include <map>
 
 struct Program {
-    std::vector<struct Function *> functions;
+    std::vector<struct Function*> functions;
 };
 
 struct Statement {
@@ -25,29 +25,29 @@ struct Expression {
 struct Function: Statement {
     std::string name;
     std::vector<std::string> parameters;
-    std::vector<Statement *> block;
+    std::vector<Statement*> block;
     auto print(int)->void;
     auto interpret()->void;
 };
 
 struct Return: Statement {
-    Expression *expression;
+    Expression* expression;
     auto print(int)->void;
     auto interpret()->void;
 };
 
 struct Variable: Statement {
     std::string name;
-    Expression *expression;
+    Expression* expression;
     auto print(int)->void;
     auto interpret()->void;
 };
 
 struct For: Statement {
-    Variable *variable;
-    Expression *condition;
-    Expression *expression;
-    std::vector<Statement *> block;
+    Variable* variable;
+    Expression* condition;
+    Expression* expression;
+    std::vector<Statement*> block;
     auto print(int)->void;
     auto interpret()->void;
 };
@@ -63,81 +63,81 @@ struct Continue: Statement {
 };
 
 struct If: Statement {
-    std::vector<Expression *> conditions;
-    std::vector<std::vector<Statement *>> blocks;
-    std::vector<Statement *> elseBlock;
+    std::vector<Expression*> conditions;
+    std::vector<std::vector<Statement*>> blocks;
+    std::vector<Statement*> elseBlock;
     auto print(int)->void;
     auto interpret()->void;
 };
 
 struct Print: Statement {
     bool lineFeed = false;
-    std::vector<Expression *> arguments;
+    std::vector<Expression*> arguments;
     auto print(int)->void;
     auto interpret()->void;
 };
 
 struct ExpressionStatement: Statement {
-    Expression *expression;
+    Expression* expression;
     auto print(int)->void;
     auto interpret()->void;
 };
 
 struct Or: Expression {
-    Expression *lhs;
-    Expression *rhs;
+    Expression* lhs;
+    Expression* rhs;
     auto print(int)->void;
     auto interpret()->std::any;
 };
 
 struct And: Expression {
-    Expression *lhs;
-    Expression *rhs;
+    Expression* lhs;
+    Expression* rhs;
     auto print(int)->void;
     auto interpret()->std::any;
 };
 
 struct Relational: Expression {
     Kind kind;
-    Expression *lhs;
-    Expression *rhs;
+    Expression* lhs;
+    Expression* rhs;
     auto print(int)->void;
     auto interpret()->std::any;
 };
 
 struct Arithmetic: Expression {
     Kind kind;
-    Expression *lhs;
-    Expression *rhs;
+    Expression* lhs;
+    Expression* rhs;
     auto print(int)->void;
     auto interpret()->std::any;
 };
 
 struct Unary: Expression {
     Kind kind;
-    Expression *sub;
+    Expression* sub;
     auto print(int)->void;
     auto interpret()->std::any;
 };
 
 struct Call: Expression {
-    Expression *sub;
-    std::vector<Expression *> arguments;
+    Expression* sub;
+    std::vector<Expression*> arguments;
     auto print(int)->void;
     auto interpret()->std::any;
 };
 
 struct GetElement: Expression {
-    Expression *sub;
-    Expression *index;
+    Expression* sub;
+    Expression* index;
     auto print(int)->void;
     auto interpret()->std::any;
 };
 
 struct SetElement: Expression {
-    Expression *sub;
-    Expression *index;
-    Expression *value;
+    Expression* sub;
+    Expression* index;
+    Expression* value;
     auto print(int)->void;
     auto interpret()->std::any;
 };
@@ -150,7 +150,7 @@ struct GetVariable: Expression {
 
 struct SetVariable: Expression {
     std::string name;
-    Expression *value;
+    Expression* value;
     auto print(int)->void;
     auto interpret()->std::any;
 };
@@ -176,13 +176,13 @@ struct StringLiteral: Expression {
 };
 
 struct ArrayLiteral: Expression {
-    std::vector<Expression *> values;
+    std::vector<Expression*> values;
     auto print(int)->void;
     auto interpret()->std::any;
 };
 
 struct MapLiteral: Expression {
-    std::map<std::string, Expression *> values;
+    std::map<std::string, Expression*> values;
     auto print(int)->void;
     auto interpret()->std::any;
 };

@@ -48,11 +48,11 @@ auto toString(std::any value)->std::string {
 }
 
 auto isArray(std::any value)->bool {
-    return value.type() == typeid(Array *);
+    return value.type() == typeid(Array*);
 }
 
-auto toArray(std::any value)->Array * {
-    return std::any_cast<Array *>(value);
+auto toArray(std::any value)->Array* {
+    return std::any_cast<Array*>(value);
 }
 
 auto getValueOfArray(std::any object, std::any index)->std::any {
@@ -70,11 +70,11 @@ auto setValueOfArray(std::any object, std::any index, std::any value)->std::any 
 }
 
 auto isMap(std::any value)->bool {
-    return value.type() == typeid(Map *);
+    return value.type() == typeid(Map*);
 }
 
-auto toMap(std::any value)->Map * {
-    return std::any_cast<Map *>(value);
+auto toMap(std::any value)->Map* {
+    return std::any_cast<Map*>(value);
 }
 
 auto getValueOfMap(std::any object, std::any key)->std::any {
@@ -89,11 +89,11 @@ auto setValueOfMap(std::any object, std::any key, std::any value)->std::any {
 }
 
 auto isFunction(std::any value)->bool {
-    return value.type() == typeid(Function *);
+    return value.type() == typeid(Function*);
 }
 
-auto toFunction(std::any value)->Function * {
-    return std::any_cast<Function *>(value);
+auto toFunction(std::any value)->Function* {
+    return std::any_cast<Function*>(value);
 }
 
 auto isBuiltinFunction(std::any value)->bool {
