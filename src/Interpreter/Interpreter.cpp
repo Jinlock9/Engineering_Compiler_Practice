@@ -5,8 +5,7 @@
 #include <functional>
 #include <cmath>
 
-#include "Datatype.h"
-#include "../Parser/Node.h"
+#include "Interpreter.h"
 
 struct ReturnException { std::any result; };
 struct BreakException {};

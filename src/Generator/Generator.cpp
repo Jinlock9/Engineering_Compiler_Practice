@@ -3,19 +3,9 @@
 #include <tuple>
 #include <vector>
 #include <iomanip>
+#include <cstdint>
 
-#include "../Parser/Node.h"
-#include "Code.h"
-
-static auto getLocal(std::string)->size_t;
-static auto setLocal(std::string)->void;
-static auto initBlock()->void;
-static auto pushBlock()->void;
-static auto popBlock()->void;
-static auto writeCode(Instruction)->size_t;
-static auto writeCode(Instruction, std::any)->size_t;
-static auto patchAddress(size_t)->void;
-static auto patchOperand(size_t, size_t)->void;
+#include "Generator.h"
 
 static std::vector<Code> codeList;
 static std::map<std::string, size_t> functionTable;
@@ -278,7 +268,7 @@ auto popBlock()->void {
 }
 
 auto writeCode(Instruction instruction)->size_t {
-    codeList.push_back({instruction});
+    codeList.push_back({instruction, nullptr});
     return codeList.size() - 1;
 }
 
@@ -293,4 +283,18 @@ auto patchAddress(size_t codeIndex)->void {
 
 auto patchOperand(size_t codeIndex, size_t operand)->void {
     codeList[codeIndex].operand = operand;
+}
+
+auto printObjectCode(std::tuple<std::vector<Code>, std::map<std::string, size_t>> objectCode)->void {
+    auto codeList = std::get<0>(objectCode);
+    auto functionTable = std::get<1>(objectCode);
+    std::cout << std::setw(11) << std::left << "FUNCTION" << "ADDRESS" << std::endl;
+    std::cout << std::string(18, '-') << std::endl;
+    for (auto& [key, value] : functionTable)
+        std::cout << std::setw(11) << key << value << std::endl;
+    std::cout << std::endl;
+    std::cout << "ADDR" << " " << std::setw(15) << "INSTRUCTION" << "OPERAND" << std::endl;
+    std::cout << std::string(36, '-') << std::endl;
+    for (size_t i = 0; i < codeList.size(); i++)
+        std::cout << std::setw(4) << std::right << i << " " << codeList[i] << std::endl;
 }

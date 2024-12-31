@@ -116,3 +116,10 @@ auto scanOperatorAndPunctuator()->Token {
     }
     return Token{toKind(string), string};
 }
+
+auto printTokenList(std::vector<Token> tokenList)->void {
+    std::cout << std::setw(12) << std::left << "KIND" << "STRING" << std::endl;
+    std::cout << std::string(23, '-') << std::endl;
+    for (auto& token: tokenList)
+      std::cout << token << std::endl;
+}

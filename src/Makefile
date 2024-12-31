@@ -28,7 +28,7 @@ SRCS = $(SRC_DIR)/Main.cpp \
 OBJS = $(SRCS:.cpp=.o)
 
 # Include directories
-INCLUDES = -I$(SRC_DIR) -I$(SCANNER_DIR) -I$(PARSER_DIR) -I$(INTERPRETER_DIR) -I$(Generator)
+INCLUDES = -I$(SRC_DIR) -I$(SCANNER_DIR) -I$(PARSER_DIR) -I$(INTERPRETER_DIR) -I$(GENERATOR_DIR)
 
 # Default target
 all: $(TARGET)
