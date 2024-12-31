@@ -10,6 +10,7 @@ SRC_DIR = ../src
 SCANNER_DIR = $(SRC_DIR)/Scanner
 PARSER_DIR = $(SRC_DIR)/Parser
 INTERPRETER_DIR = $(SRC_DIR)/Interpreter
+GENERATOR_DIR = $(SRC_DIR)/Generator
 
 # Source files
 SRCS = $(SRC_DIR)/Main.cpp \
@@ -19,13 +20,15 @@ SRCS = $(SRC_DIR)/Main.cpp \
        $(PARSER_DIR)/Printer.cpp \
 	   $(INTERPRETER_DIR)/Interpreter.cpp \
 	   $(INTERPRETER_DIR)/Datatype.cpp \
-	   $(INTERPRETER_DIR)/BuiltinFunctionTable.cpp
+	   $(INTERPRETER_DIR)/BuiltinFunctionTable.cpp \
+	   $(GENERATOR_DIR)/Generator.cpp \
+	   $(GENERATOR_DIR)/Code.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
 
 # Include directories
-INCLUDES = -I$(SRC_DIR) -I$(SCANNER_DIR) -I$(PARSER_DIR) -I$(INTERPRETER_DIR)
+INCLUDES = -I$(SRC_DIR) -I$(SCANNER_DIR) -I$(PARSER_DIR) -I$(INTERPRETER_DIR) -I$(Generator)
 
 # Default target
 all: $(TARGET)
