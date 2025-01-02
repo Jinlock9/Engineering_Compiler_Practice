@@ -1,0 +1,4 @@
+function main() {
+    printLine 'Hello, World!';
+    printLine 1 + 2 * 3;
+}

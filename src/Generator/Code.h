@@ -1,3 +1,6 @@
+#ifndef __CODE_H__
+#define __CODE_H__
+
 #include <any>
 #include <string>
 #include <iostream>
@@ -34,3 +37,5 @@ struct Code {
 };
 
 auto operator<<(std::ostream&, Code&)->std::ostream&;
+
+#endif // __CODE_H__

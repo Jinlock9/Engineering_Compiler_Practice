@@ -11,5 +11,6 @@
 #include "../Parser/Parser.h"
 #include "../Interpreter/Interpreter.h"
 #include "../Generator/Generator.h"
+#include "../Machine/Machine.h"
 
 #endif // __MAIN_H__
